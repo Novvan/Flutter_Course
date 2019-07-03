@@ -16,20 +16,46 @@ class _MyQuizState extends State<MyQuiz> {
   final _questions = const [
     {
       'questionText': 'What\'s your favorite color?',
-      'answers': ['Black', 'Red', 'Green', 'White'],
+      'answers': [
+        {'text': 'Black', 'score': 10},
+        {'text': 'Red', 'score': 5},
+        {'text': 'Green', 'score': 3},
+        {'text': 'White', 'score': 1},
+      ],
     },
     {
       'questionText': 'What\'s your favorite animal?',
-      'answers': ['Rabbit', 'Snake', 'Elephant', 'Lion'],
+      'answers': [
+        {'text': 'Snake', 'score': 10},
+        {'text': 'Lion', 'score': 5},
+        {'text': 'Cat', 'score': 3},
+        {'text': 'Dog', 'score': 1},
+      ],
     },
     {
       'questionText': 'Who\'s your favorite football player?',
-      'answers': ['Messi', 'Cristiano', 'Mbappe', 'Neymar'],
+      'answers': [
+        {'text': 'Messi', 'score': 0},
+        {'text': 'Cristiano', 'score': 5},
+        {'text': 'Mbappe', 'score': 3},
+        {'text': 'Neymar', 'score': 10},
+      ],
     },
   ];
   var _questionIndex = 0;
+  var _totalScore = 0;
 
-  void _answerQuestion() {
+  void _resetQuiz(){
+    setState(() {
+    _questionIndex = 0;
+    _totalScore = 0;
+    });
+  }
+
+  void _answerQuestion(int score) {
+
+    _totalScore += score;
+
     setState(() {
       _questionIndex = _questionIndex + 1;
     });
@@ -44,10 +70,11 @@ class _MyQuizState extends State<MyQuiz> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'Quiz App',
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: Text('My First App'),
+          title: Text('Quiz App'),
         ),
         body: _questionIndex < _questions.length
             ? Quiz(
@@ -55,7 +82,7 @@ class _MyQuizState extends State<MyQuiz> {
                 questionIndex: _questionIndex,
                 questions: _questions,
               )
-            : Result(),
+            : Result(_totalScore,_resetQuiz),
       ),
     );
   }
