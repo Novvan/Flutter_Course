@@ -23,8 +23,8 @@ class _MyQuizState extends State<MyQuiz> {
       'answers': ['Rabbit', 'Snake', 'Elephant', 'Lion'],
     },
     {
-      'questionText': 'Who\'s your favorite instructor?',
-      'answers': ['Max', 'Max', 'Max', 'Max'],
+      'questionText': 'Who\'s your favorite football player?',
+      'answers': ['Messi', 'Cristiano', 'Mbappe', 'Neymar'],
     },
   ];
   var _questionIndex = 0;
@@ -44,6 +44,7 @@ class _MyQuizState extends State<MyQuiz> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
           title: Text('My First App'),
